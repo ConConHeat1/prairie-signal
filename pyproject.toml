@@ -1,0 +1,50 @@
+[project]
+name = "prairie-signal-workspace"
+version = "0.1.0"
+description = "Python workspace for the Prairie Signal API and ingestion services."
+requires-python = ">=3.13,<3.14"
+dependencies = []
+
+[dependency-groups]
+dev = [
+  "mypy==1.18.2",
+  "pip-audit==2.9.0",
+  "pytest==9.0.3",
+  "pytest-asyncio==1.4.0",
+  "pytest-cov==7.0.0",
+  "respx==0.22.0",
+  "ruff==0.13.2",
+]
+
+[tool.uv]
+package = false
+
+[tool.uv.workspace]
+members = ["apps/api", "services/ingestion"]
+
+[tool.ruff]
+target-version = "py313"
+line-length = 100
+extend-exclude = ["data", "node_modules"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B", "ASYNC", "S"]
+ignore = ["S101"]
+
+[tool.ruff.format]
+quote-style = "double"
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+pythonpath = ["apps/api/src", "services/ingestion/src"]
+testpaths = ["apps/api/tests", "services/ingestion/tests"]
+
+[tool.mypy]
+python_version = "3.13"
+strict = true
+plugins = ["pydantic.mypy"]
+exclude = "(^|/)(migrations|node_modules|data|tests)/"
+
+[[tool.mypy.overrides]]
+module = ["yaml", "rasterio", "rasterio.*"]
+ignore_missing_imports = true

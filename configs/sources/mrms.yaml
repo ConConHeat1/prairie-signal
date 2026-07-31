@@ -1,0 +1,37 @@
+id: noaa-mrms
+official_name: NOAA Multi-Radar Multi-Sensor System
+access:
+  base_url: https://noaa-mrms-pds.s3.amazonaws.com
+  bucket: noaa-mrms-pds
+  domain: CONUS
+  anonymous: true
+product:
+  id: MergedReflectivityQCComposite_00.50
+  source_name: MergedReflectivityQCComposite
+  variable: composite_reflectivity
+  units: dBZ
+  cadence_minutes: 2
+  source_grid_type: regular_latitude_longitude
+  source_resolution_degrees: 0.01
+  source_width_pixels: 7000
+  source_height_pixels: 3500
+  source_bounds_degrees:
+    west: -130
+    south: 20
+    east: -60
+    north: 55
+  source_x_scan: west_to_east
+  source_y_scan: north_to_south
+  missing_value: -99
+  no_coverage_value: -999
+download:
+  timeout_seconds: 60
+  max_retries: 3
+  max_compressed_bytes: 67108864
+  max_decompressed_bytes: 268435456
+  max_future_skew_seconds: 120
+  stale_after_minutes: 15
+processing:
+  version: mrms-reflectivity-v1
+  resampling: nearest
+  zarr_chunk_size: 256

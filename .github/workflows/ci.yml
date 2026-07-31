@@ -1,0 +1,94 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  python:
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgis/postgis:17-3.5
+        env:
+          POSTGRES_DB: prairie_signal_test
+          POSTGRES_USER: prairie_signal
+          POSTGRES_PASSWORD: test-only
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U prairie_signal -d prairie_signal_test"
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 20
+      cache:
+        image: valkey/valkey:8.1-alpine
+        ports:
+          - 6379:6379
+        options: >-
+          --health-cmd "valkey-cli ping"
+          --health-interval 5s
+          --health-timeout 3s
+          --health-retries 20
+    env:
+      ENVIRONMENT: test
+      DATABASE_URL: postgresql+asyncpg://prairie_signal:test-only@localhost:5432/prairie_signal_test
+      CACHE_URL: redis://localhost:6379/0
+      NWS_USER_AGENT: PrairieSignal-CI/0.1
+      NWS_CONTACT: https://example.invalid/ci
+      NWS_LIVE_ENABLED: "false"
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v6
+        with:
+          python-version: "3.13"
+          enable-cache: true
+      - run: uv sync --all-packages --dev --frozen
+      - run: uv run ruff format --check apps services
+      - run: uv run ruff check apps services
+      - run: uv run mypy apps/api services/ingestion
+      - run: uv run --package prairie-signal-api alembic -c apps/api/alembic.ini upgrade head
+      - run: uv run --package prairie-signal-api alembic -c apps/api/alembic.ini check
+      - run: uv run pytest --cov=apps/api --cov=services/ingestion --cov-report=term-missing
+      - run: uv run pip-audit
+      - run: uv run --package prairie-signal-api python -m prairie_signal_api.export_openapi --check
+
+  web:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10.15.1
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm audit --prod
+      - run: pnpm format:check
+      - run: pnpm lint
+      - run: pnpm typecheck
+      - run: pnpm test
+      - run: pnpm build
+      - run: pnpm api:check
+
+  browser:
+    runs-on: ubuntu-latest
+    needs: [python, web]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10.15.1
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm --filter @prairie-signal/web exec playwright install --with-deps chromium
+      - run: pnpm test:e2e

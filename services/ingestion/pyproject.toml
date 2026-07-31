@@ -1,0 +1,50 @@
+[project]
+name = "prairie-signal-ingestion"
+version = "0.1.0"
+description = "Privacy-bounded public benchmark ingestion for Prairie Signal"
+requires-python = ">=3.13,<3.14"
+dependencies = [
+  "httpx==0.28.1",
+  "numpy==2.5.1",
+  "pillow==12.3.0",
+  "prairie-signal-api",
+  "pyyaml==6.0.3",
+  "rasterio==1.5.0",
+  "sqlalchemy==2.0.51",
+  "structlog==25.4.0",
+  "zarr==3.3.0",
+]
+
+[project.scripts]
+prairie-signal-ingest = "prairie_signal_ingestion.cli:main"
+
+[build-system]
+requires = ["hatchling==1.27.0"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/prairie_signal_ingestion"]
+
+[tool.uv.sources]
+prairie-signal-api = { workspace = true }
+
+[tool.pytest.ini_options]
+addopts = "-ra --strict-markers"
+asyncio_mode = "auto"
+pythonpath = ["src", "../../apps/api/src"]
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py313"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B", "ASYNC", "RUF"]
+
+[tool.mypy]
+python_version = "3.13"
+strict = true
+
+[[tool.mypy.overrides]]
+module = ["yaml", "rasterio", "rasterio.*"]
+ignore_missing_imports = true

@@ -1,0 +1,38 @@
+# JavaScript
+node_modules/
+.next/
+out/
+coverage/
+playwright-report/
+test-results/
+*.tsbuildinfo
+
+# Python
+.venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# Local data and runtime state. Keep this root-anchored: the API ships a
+# `prairie_signal_api/data` package containing the offline location index.
+/data/
+*.sqlite3
+*.db
+.DS_Store
+
+# Environment and secrets
+.env
+.env.local
+.env.*.local
+!.env.example
+
+# Editors
+.idea/
+.vscode/
+
+# Observability
+infrastructure/monitoring/grafana/data/

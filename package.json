@@ -1,0 +1,28 @@
+{
+  "name": "prairie-signal",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Ad-free, public-data weather forecasting platform for Lincoln and the central Great Plains.",
+  "license": "UNLICENSED",
+  "packageManager": "pnpm@10.15.1",
+  "engines": {
+    "node": ">=24.0.0"
+  },
+  "pnpm": {
+    "overrides": {
+      "postcss": "8.5.25",
+      "sharp": "0.35.3"
+    }
+  },
+  "scripts": {
+    "dev": "pnpm --filter @prairie-signal/web dev",
+    "build": "pnpm -r --if-present build",
+    "lint": "pnpm -r --if-present lint",
+    "format:check": "pnpm -r --if-present format:check",
+    "typecheck": "pnpm -r --if-present typecheck",
+    "test": "pnpm -r --if-present test",
+    "test:e2e": "pnpm --filter @prairie-signal/web test:e2e",
+    "api:generate": "pnpm --filter @prairie-signal/api-client generate",
+    "api:check": "pnpm --filter @prairie-signal/api-client check"
+  }
+}

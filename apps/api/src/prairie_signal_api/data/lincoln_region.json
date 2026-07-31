@@ -1,0 +1,21 @@
+[
+  {"id":"place:31537","name":"Lincoln","region":"NE","country":"US","latitude":40.8136,"longitude":-96.7026,"timezone":"America/Chicago","kind":"city","label":"Lincoln, NE"},
+  {"id":"place:37000","name":"Omaha","region":"NE","country":"US","latitude":41.2565,"longitude":-95.9345,"timezone":"America/Chicago","kind":"city","label":"Omaha, NE"},
+  {"id":"place:19595","name":"Grand Island","region":"NE","country":"US","latitude":40.9264,"longitude":-98.3420,"timezone":"America/Chicago","kind":"city","label":"Grand Island, NE"},
+  {"id":"place:25055","name":"Kearney","region":"NE","country":"US","latitude":40.6995,"longitude":-99.0815,"timezone":"America/Chicago","kind":"city","label":"Kearney, NE"},
+  {"id":"place:34615","name":"Norfolk","region":"NE","country":"US","latitude":42.0327,"longitude":-97.4138,"timezone":"America/Chicago","kind":"city","label":"Norfolk, NE"},
+  {"id":"place:03390","name":"Beatrice","region":"NE","country":"US","latitude":40.2681,"longitude":-96.7470,"timezone":"America/Chicago","kind":"city","label":"Beatrice, NE"},
+  {"id":"place:17670","name":"Fremont","region":"NE","country":"US","latitude":41.4333,"longitude":-96.4981,"timezone":"America/Chicago","kind":"city","label":"Fremont, NE"},
+  {"id":"place:10110","name":"Columbus","region":"NE","country":"US","latitude":41.4303,"longitude":-97.3594,"timezone":"America/Chicago","kind":"city","label":"Columbus, NE"},
+  {"id":"place:21415","name":"Hastings","region":"NE","country":"US","latitude":40.5861,"longitude":-98.3884,"timezone":"America/Chicago","kind":"city","label":"Hastings, NE"},
+  {"id":"place:33700","name":"Nebraska City","region":"NE","country":"US","latitude":40.6767,"longitude":-95.8592,"timezone":"America/Chicago","kind":"city","label":"Nebraska City, NE"},
+  {"id":"place:36000","name":"Kansas City","region":"MO","country":"US","latitude":39.0997,"longitude":-94.5786,"timezone":"America/Chicago","kind":"city","label":"Kansas City, MO"},
+  {"id":"place:21000","name":"Des Moines","region":"IA","country":"US","latitude":41.5868,"longitude":-93.6250,"timezone":"America/Chicago","kind":"city","label":"Des Moines, IA"},
+  {"id":"place:59020","name":"Sioux Falls","region":"SD","country":"US","latitude":43.5460,"longitude":-96.7313,"timezone":"America/Chicago","kind":"city","label":"Sioux Falls, SD"},
+  {"id":"place:79000","name":"Wichita","region":"KS","country":"US","latitude":37.6872,"longitude":-97.3301,"timezone":"America/Chicago","kind":"city","label":"Wichita, KS"},
+  {"id":"zcta:68502","name":"68502","region":"NE","country":"US","latitude":40.7892,"longitude":-96.6952,"timezone":"America/Chicago","kind":"zcta","label":"ZIP 68502 approximation"},
+  {"id":"zcta:68508","name":"68508","region":"NE","country":"US","latitude":40.8150,"longitude":-96.7045,"timezone":"America/Chicago","kind":"zcta","label":"ZIP 68508 approximation"},
+  {"id":"zcta:68510","name":"68510","region":"NE","country":"US","latitude":40.8079,"longitude":-96.6507,"timezone":"America/Chicago","kind":"zcta","label":"ZIP 68510 approximation"},
+  {"id":"zcta:68516","name":"68516","region":"NE","country":"US","latitude":40.7395,"longitude":-96.6523,"timezone":"America/Chicago","kind":"zcta","label":"ZIP 68516 approximation"},
+  {"id":"zcta:68102","name":"68102","region":"NE","country":"US","latitude":41.2594,"longitude":-95.9370,"timezone":"America/Chicago","kind":"zcta","label":"ZIP 68102 approximation"}
+]

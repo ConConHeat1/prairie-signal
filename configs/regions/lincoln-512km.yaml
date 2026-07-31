@@ -1,0 +1,25 @@
+id: lincoln-512km
+name: Lincoln and the central Great Plains
+center:
+  latitude: 40.8136
+  longitude: -96.7026
+extent_km:
+  width: 512
+  height: 512
+grid:
+  projection: EPSG:5070
+  nominal_resolution_m: 1000
+  interval_minutes: 5
+  history_minutes: 90
+  forecast_minutes: 120
+presentation_timezone: America/Chicago
+search:
+  countries:
+    - US
+  enforce_extent: true
+benchmark_locations:
+  - id: lincoln-ne
+    name: Lincoln
+    state: Nebraska
+    latitude: 40.8136
+    longitude: -96.7026
