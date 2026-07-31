@@ -60,10 +60,6 @@ def run_migrations_offline() -> None:
 
 
 def do_run_migrations(connection: Connection) -> None:
-    if connection.dialect.name == "postgresql":
-        # The PostGIS image adds topology/tiger to the role's search path. Restrict
-        # reflection to application-owned public objects during autogenerate/check.
-        connection.exec_driver_sql("SET search_path TO public")
     context.configure(
         connection=connection,
         target_metadata=target_metadata,
@@ -73,6 +69,12 @@ def do_run_migrations(connection: Connection) -> None:
     )
 
     with context.begin_transaction():
+        if connection.dialect.name == "postgresql":
+            # The PostGIS image adds topology/tiger to the role's search path. Keep
+            # the override inside Alembic's transaction so clean upgrades commit
+            # their version row and schema changes instead of being rolled back when
+            # the connection closes.
+            connection.exec_driver_sql("SET LOCAL search_path TO public")
         context.run_migrations()
 
 
